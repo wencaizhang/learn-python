@@ -101,3 +101,32 @@ models.py     # 数据模块，使用 ORM 框架
 test.py       # 自动化测试模块
 views.py      # 执行响应的代码所在模块，代码逻辑处理的主要地点
 ```
+
+## 配置 url
+
+#### 在 blog 应用目录下创建 `urls.py` 文件，格式同 `myblog/urls.py` 
+
+```sh
+from django.urls import path
+
+from . import views
+urlpatterns = [
+    path('', views.index),
+]
+```
+
+#### 在 `myblog/urls.py` 中引入应用的 url 配置
+
+先引入 `include` 函数
+```sh
+from django.urls import path, include
+```
+
+再配置根 url
+```sh
+urlpatterns = [
+    path('blog/', include('blog.urls')),
+]
+```
+
+## Django Template 冲突问题
