@@ -106,10 +106,11 @@ views.py      # 执行响应的代码所在模块，代码逻辑处理的主要�
 
 #### 在 blog 应用目录下创建 `urls.py` 文件，格式同 `myblog/urls.py` 
 
-```sh
+```python
 from django.urls import path
 
 from . import views
+
 urlpatterns = [
     path('', views.index),
 ]
@@ -123,10 +124,29 @@ from django.urls import path, include
 ```
 
 再配置根 url
-```sh
+```python
 urlpatterns = [
     path('blog/', include('blog.urls')),
 ]
 ```
 
+## Template 
+
+Django 自带模板语言（Django Template language），使用双大括号语法 `{{ }}`
+
+在应用目录下创建 `Template` 目录，即 `blog/Template/`。然后创建 html 文件。
+
+然后修改 `blog/views.py`，渲染模板文件：
+
+```python
+from django.shortcuts import render
+def index(request):
+    return render(request, 'index.html', { 'hello': 'Hello' })
+```
+
 ## Django Template 冲突问题
+
+如果创建两个应用，假设为 blog 和 blog2，分别都有各自的 Template 目录：`blog/Template/` 和 `blog2/Template/`。
+
+两个 Template 目录有相同名字的文件 `index.html`。
+
